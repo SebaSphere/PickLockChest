@@ -1,0 +1,10 @@
+name: PickLockChest
+version: 1.0-SNAPSHOT
+main: dev.sebastianb.picklockchest.PickLockChest
+api-version: 1.16
+authors: [ SebaSphere ]
+commands:
+  lock:
+    description: Lock command
+    usage: /lock
+    permission: picklockchest.lock
