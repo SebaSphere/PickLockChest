@@ -33,7 +33,7 @@ public class Utility {
 
     // I fucking HATE how spigot does this. Grabs Chest.Type from back, so inverse from a normal view
     // Chest.Type.RIGHT == left side of chest. That's at least what I'm seeing
-    // I could also be dumb tho lol
+    // I could also be dumb tho lol.
     public static Block getLeftDoubleChestLocation(Block block) {
         if (!chestTypes.contains(block.getType())) {
             throw new NoChestException(block.toString() + " has been inputted. Not a chest.");
