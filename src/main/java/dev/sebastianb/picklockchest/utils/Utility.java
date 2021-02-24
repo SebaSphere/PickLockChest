@@ -73,18 +73,6 @@ public class Utility {
         }
     }
 
-    private static final String regex = "([^.]*)";
-
-
-    private static final Pattern pattern = Pattern.compile(regex);
-
-//    private static int getCoord(double number) {
-//        String string = String.valueOf(number);
-//
-//        return Integer.parseInt(string.split("\\.")[0]);
-//
-//
-//    }
 
 
 }
