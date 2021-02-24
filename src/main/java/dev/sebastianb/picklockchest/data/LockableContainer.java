@@ -9,15 +9,12 @@ import org.bukkit.entity.Player;
 public class LockableContainer {
 
     private boolean chestClaimed;
-    private boolean a;
 
 
     public LockableContainer(Block block) {
-        if (chestClaimed) {
+        // call all values in data here (a array list of chest loca
 
-        } else {
 
-        }
     }
 
 
@@ -33,8 +30,16 @@ public class LockableContainer {
 
     }
 
-    public boolean isLocked(Location location, Player player) {
-        return false;
+    public boolean isLocked(Location location) {
+        return true;
+    }
+
+    public boolean isOwner(Location location, Player player) {
+        return true;
+    }
+
+    public boolean isTrusted(Location location, Player player) {
+        return true;
     }
 
 

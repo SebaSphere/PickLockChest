@@ -7,11 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
 public final class PickLockChest extends JavaPlugin {
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+        registerConfig();
         registerEvents();
         registerCommands();
 
@@ -20,6 +22,10 @@ public final class PickLockChest extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    private void registerConfig() {
+
     }
 
     private void registerEvents() {
@@ -33,4 +39,5 @@ public final class PickLockChest extends JavaPlugin {
         this.getCommand("lock").setExecutor(new CommandLock());
 
     }
+
 }

@@ -4,6 +4,8 @@ import dev.sebastianb.picklockchest.Constants;
 import dev.sebastianb.picklockchest.PickLockChest;
 import dev.sebastianb.picklockchest.commands.locker.PlayerLockData;
 import dev.sebastianb.picklockchest.data.LockableContainer;
+import dev.sebastianb.picklockchest.utils.Utility;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,38 +38,34 @@ public class ChestInteractionListener implements Listener {
 
 
 
-//    @EventHandler
-//    public void onContainerOpen(InventoryOpenEvent event) {
-////        Player player = (Player) event.getPlayer();
-////
-////        Container container = null;
-////        InventoryHolder inventoryHolder = event.getInventory().getHolder();
-////        if (inventoryHolder instanceof Chest) {
-////            container = Chest.class.cast(inventoryHolder);
-////
-////        } else if (inventoryHolder instanceof DoubleChest) {
-////            DoubleChest doubleChest = DoubleChest.class.cast(inventoryHolder);
-////            container = Chest.class.cast(doubleChest.getLeftSide());
-////
-////        } else if (inventoryHolder instanceof Container) {
-////            container = Container.class.cast(inventoryHolder);
-////
-////        } else {
-////            return;
-////        }
-////        LockableContainer lockedContainer = new LockableContainer(container);
-////        if (lockedContainer.isLocked(container.getLocation(), player)) {
-////            event.setCancelled(true);
-////        }
-//
-//    }
-
     private void preventContainerUse(PlayerInteractEvent event, Material block, LockableContainer container) {
         try {
             if (event.getClickedBlock().getType() == block) {
-                if (container.isLocked(event.getClickedBlock().getLocation(), event.getPlayer())) {
+                Location location = event.getClickedBlock().getLocation();
+                Player player = event.getPlayer();
+
+                System.out.println("_______");
+                System.out.println("old: " + event.getClickedBlock());
+                System.out.println(Utility.getLeftDoubleChestLocation(event.getClickedBlock()));
 
 
+                if (PlayerLockData.getPlayerLockStatus(player)) {
+                    return;
+                }
+
+                if (container.isTrusted(location, player)) {
+                    return;
+                }
+
+                if (!container.isLocked(location)) {
+                    player.sendMessage("not locked");
+                    return;
+                } else {
+                    if (container.isOwner(location, player)) {
+                        player.sendMessage("locked but have permision to use");
+                        return;
+                    }
+                    player.sendMessage("locked");
                     event.setCancelled(true);
                 }
             }
